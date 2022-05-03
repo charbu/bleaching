@@ -1,0 +1,8 @@
+-e .
+-r requirements.txt
+-r test-requirements.txt
+bumpversion>=0.5.3
+mypy>=0.740
+pre-commit>=1.16.0,<2.0
+PyYAML>=5.1.2
+wheel>=0.32.3

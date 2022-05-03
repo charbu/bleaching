@@ -1,8 +1,8 @@
 from datetime import datetime
+import sentinelhub as hub
+import utm  # type: ignore
 
 
-def extract_from_row(row):
-    date_str = "{}/{:02d}/{:02d}".format(int(row[1]), int(row[2]), int(row[3]))
-    date = datetime.strptime(date_str, "%Y/%m/%d")
-    coordinate = (row[4], row[5])
-    return date, coordinate
+def lat_lon_to_pixel(lat, lon, transform):
+    UTMx, UTMy, zone, band = utm.from_latlon(lat, lon)
+    return hub.geo_utils.utm_to_pixel(UTMx, UTMy, transform)

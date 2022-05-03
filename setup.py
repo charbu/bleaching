@@ -16,6 +16,14 @@ def get_package_meta(package_name, key):
     return getattr(package, "__{}__".format(key))
 
 
+def read_requirements(filename, ignore_version=False):
+    reqs_txt = open(filename).read()
+    parsed = reqs_txt.split("\n")
+    if ignore_version:
+        parsed = [r.split("==")[0] for r in parsed]
+    return [r for r in parsed if len(r) > 0]
+
+
 #####
 # Project-specific constants
 #####
@@ -28,7 +36,6 @@ setup(
     name=NAME,
     version=get_package_meta(PACKAGE_NAME, "version"),
     description=get_package_meta(PACKAGE_NAME, "description"),
-    url=get_package_meta(PACKAGE_NAME, "uri"),
     author=get_package_meta(PACKAGE_NAME, "author"),
     author_email=get_package_meta(PACKAGE_NAME, "email"),
     maintainer=get_package_meta(PACKAGE_NAME, "author"),
